@@ -26,7 +26,12 @@ function HatList () {
             {/* List of Hats */}
             <ul>
               {hats.map((hat, index) => (
-                <li key={index}>{hat.style_name}</li>
+                <li key={index}>
+                  <h2>{hat.style_name}</h2>
+                  <p>Fabric: {hat.fabric}</p>
+                  <p>Color: {hat.color}</p>
+                  <img src={hat.picture_url} alt={hat.style_name} style={{width: "200px"}}/>
+                </li>
               ))}
             </ul>
           </div>
