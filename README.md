@@ -17,6 +17,7 @@ microservice, here.
 <!-- Explain your models and integration with the wardrobe
 microservice, here.-->
 
-My hat model takes in a few CharFields and URLField based off a model.Models import 
-they come as of now with a GET and PUT api call that can create a hat, view all hats, or show specific details of a specific hat by ID.
-It does not integrate with the wardrobe microservice at the moment.
+I have a fully functioning Hat model that has been integrated into my react frontend utilizing GET PUT DELTE & POST api functions in my views.py file 
+On the front end I have a hat list page which routes the hat models in my db to my react app.js and i have a create a hat nav link which allows the user to create a hat.
+
+I have yet to utilize polling and there is no interaction with the location resources as of yet.
