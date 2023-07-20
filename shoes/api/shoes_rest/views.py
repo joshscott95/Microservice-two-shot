@@ -9,11 +9,19 @@ from .models import Shoe
 class ShoeListEncoder(ModelEncoder):
     model = Shoe
     properties = [
+        "manufacturer",
+        "model_name",
+        "id",
+    ]
+
+class ShoeDetailEncoder(ModelEncoder):
+    model = Shoe
+    properties = [
         "size",
         "color",
         "manufacturer",
-        "picture",
         "model_name",
+        "picture",
     ]
 
 @require_http_methods(["GET", "POST"])
@@ -34,10 +42,23 @@ def api_list_shoes(request):
             safe=False
         )
 
+@require_http_methods(["DELETE", "GET", "PUT"])
 def api_show_shoe(request, pk):
-    shoe = Shoe.objects.get(id=pk)
-    return JsonResponse(
-        shoe,
-        encoder=ShoeListEncoder,
-        safe=False
-    )
+
+    if request.method == "GET":
+        shoe = Shoe.objects.get(id=pk)
+        return JsonResponse(
+            {"shoe": shoe},
+            encoder=ShoeDetailEncoder,
+        )
+    elif request.method == "DELETE":
+        try:
+            shoe = Shoe.objects.get(id=pk)
+            shoe.delete()
+            return JsonResponse(
+                shoe,
+                encoder=ShoeDetailEncoder,
+                safe=False,
+            )
+        except Shoe.DoesNotExist:
+            return JsonResponse({"message": "Does not exist"})
