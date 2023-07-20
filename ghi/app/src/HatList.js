@@ -8,7 +8,20 @@ function HatList () {
         const data = await response.json();
         setHats(data.hats);
     };
+    // Delete function
+    const deleteHat = async (id) => {
+      const response = await fetch(`http://localhost:8090/api/hats/${id}`, {
+          method: 'DELETE'
+      });
 
+      if (response.ok) {
+          // Filter out the deleted hat
+          const newHats = hats.filter(hat => hat.id !== id);
+          setHats(newHats);
+      } else {
+          console.error(`Failed to delete hat with id: ${id}`);
+      }
+    };
     // fetch hats when component mounts
     useEffect(() => {
         fetchHats();
@@ -31,6 +44,7 @@ function HatList () {
                   <p>Fabric: {hat.fabric}</p>
                   <p>Color: {hat.color}</p>
                   <img src={hat.picture_url} alt={hat.style_name} style={{width: "200px"}}/>
+                  <button onClick={() => deleteHat(hat.id)}>Delete</button>
                 </li>
               ))}
             </ul>
