@@ -11,6 +11,10 @@ django.setup()
 
 # Import models from hats_rest, here.
 # from shoes_rest.models import Something
+from shoes_rest.models import BinVO
+
+def get_bins():
+    
 
 def poll():
     while True:
