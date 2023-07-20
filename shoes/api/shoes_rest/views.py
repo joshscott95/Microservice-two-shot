@@ -61,4 +61,4 @@ def api_show_shoe(request, pk):
                 safe=False,
             )
         except Shoe.DoesNotExist:
-            return JsonResponse({"message": "Does not exist"})
+            return JsonResponse({"message": "Does not exist"})  
