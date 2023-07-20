@@ -2,7 +2,7 @@
 
 Team:
 
-* Kacton D - Shoes
+* Kacton D - Shoes ( ✌︎‘ω’)✌︎
 * Joshua S - Hats
 
 ## Design
