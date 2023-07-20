@@ -17,3 +17,4 @@ class Shoe(models.Model):
 
     class Meta:
         ordering = ("manufacturer", "model_name")
+ 
