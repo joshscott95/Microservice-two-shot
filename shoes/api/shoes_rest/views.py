@@ -11,7 +11,9 @@ class ShoeListEncoder(ModelEncoder):
     properties = [
         "size",
         "color",
-        "brand",
+        "manufacturer",
+        "picture",
+        "model_name",
     ]
 
 @require_http_methods(["GET", "POST"])
