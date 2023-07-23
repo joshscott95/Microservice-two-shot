@@ -11,12 +11,28 @@ django.setup()
 from hats_rest.models import Hat, LocationVO
 
 
+
 def poll():
     while True:
         print('Hats poller polling for data')
         try:
             response = requests.get('http://wardrobe-api:8000/api/locations/')
-            locations = response.json()
+            # Checking if response is valid JSON
+            try:
+                data = response.json()
+            except ValueError:
+                print(f"Invalid JSON response: {response.text}")
+                time.sleep(60)
+                continue
+                
+            # Checking if data is a dictionary containing 'locations'
+            if not isinstance(data, dict) or 'locations' not in data:
+                print(f"Unexpected data structure: {data}")
+                time.sleep(60)
+                continue
+
+            locations = data['locations']
+
             for loc in locations:
                 # Check if location already exists in our model, if not create new one
                 location, created = LocationVO.objects.get_or_create(
