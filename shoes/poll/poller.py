@@ -36,11 +36,6 @@ def poll():
             get_bins()
             print("success")
 
-            # shoes = Shoe.objects.all()
-            # for shoe in shoes:
-            #     shoe.bin = bin
-            #     shoe.save()
-
         except Exception as e:
             print(f'Polling error: {e}', file=sys.stderr)
         time.sleep(40)
