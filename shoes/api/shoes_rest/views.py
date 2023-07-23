@@ -80,23 +80,23 @@ def api_list_shoes(request):
 
 
 
-# @require_http_methods(["DELETE", "GET", "PUT"])
-# def api_show_shoe(request, pk):
+@require_http_methods(["DELETE", "GET", "PUT"])
+def api_show_shoe(request, pk):
 
-#     if request.method == "GET":
-#         shoe = Shoe.objects.get(id=pk)
-#         return JsonResponse(
-#             {"shoe": shoe},
-#             encoder=ShoeDetailEncoder,
-#         )
-#     elif request.method == "DELETE":
-#         try:
-#             shoe = Shoe.objects.get(id=pk)
-#             shoe.delete()
-#             return JsonResponse(
-#                 shoe,
-#                 encoder=ShoeDetailEncoder,
-#                 safe=False,
-#             )
-#         except Shoe.DoesNotExist:
-#             return JsonResponse({"message": "Does not exist"})
+    if request.method == "GET":
+        shoe = Shoe.objects.get(id=pk)
+        return JsonResponse(
+            {"shoe": shoe},
+            encoder=ShoeDetailEncoder,
+        )
+    elif request.method == "DELETE":
+        try:
+            shoe = Shoe.objects.get(id=pk)
+            shoe.delete()
+            return JsonResponse(
+                shoe,
+                encoder=ShoeDetailEncoder,
+                safe=False,
+            )
+        except Shoe.DoesNotExist:
+            return JsonResponse({"message": "Does not exist"})
