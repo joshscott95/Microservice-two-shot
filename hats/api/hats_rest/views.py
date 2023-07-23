@@ -32,7 +32,7 @@ def api_list_hats(request):
         content = json.loads(request.body)
 
         location_id = content.get('wardrobe_location')
-        
+
         try:
             response = requests.get(f'http://wardrobe-api:8000/api/locations/{location_id}/')
             response.raise_for_status()
@@ -53,7 +53,7 @@ def api_list_hats(request):
 
             # Create the Hat instance
             hat = Hat.objects.create(**content)
-            
+
             return JsonResponse(
                 hat.to_dict(),
                 encoder=HatEncoder,
