@@ -21,21 +21,20 @@ class ShoeListEncoder(ModelEncoder):
     ]
 
     def get_extra_data(self, o):
-        return {"bin": o.bin.import_href}
+        return {"bin": o.bin.id}
 
 class ShoeDetailEncoder(ModelEncoder):
     model = Shoe
     properties = [
-        "color",
+        "shoe_color",
         "manufacturer",
         "model_name",
         "picture",
-        "bin_id",
+        "bin",
     ]
     encoders = {
         "bin": BinVODetailEncoder(),
     }
-
 
 @require_http_methods(["GET", "POST"])
 def api_list_shoes(request):
@@ -51,9 +50,9 @@ def api_list_shoes(request):
         print(content)
 
         try:
-            bin_id = content["bin_id"]  # Changed key from 'bin' to 'bin_id'
-            print(f'this is the id {bin_id}')
-            bin = BinVO.objects.get(import_href=bin_id)  # Fetching bin by import_href
+            id = content["bin"]
+            print(f'this is the href {id}')
+            bin = BinVO.objects.get(id=id)
             print(f'this is the bin: {bin}')
             content["bin"] = bin
 
@@ -65,7 +64,7 @@ def api_list_shoes(request):
             )
 
         try:
-            shoe = Shoe.objects.create(**content) 
+            shoe = Shoe.objects.create(**content) #put at the end of the function after trying to create a bin variable that is getting the BinVO using id or href then setting the content at bin to the BinVO that we just got then if it works then create the shoe
             return JsonResponse(
                 shoe,
                 encoder=ShoeDetailEncoder,
@@ -73,7 +72,7 @@ def api_list_shoes(request):
             )
 
         except Exception as e:
-            print(e)  
+            print(e)  # Print the exception
             return JsonResponse(
                 {"message": "An error occurred. Check server logs for more information."},
                 status=400,
