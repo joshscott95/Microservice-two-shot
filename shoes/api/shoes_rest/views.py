@@ -21,12 +21,12 @@ class ShoeListEncoder(ModelEncoder):
     ]
 
     def get_extra_data(self, o):
-        return {"bin": o.bin.import_href}
+        return {"bin": o.bin.id}
 
 class ShoeDetailEncoder(ModelEncoder):
     model = Shoe
     properties = [
-        "color",
+        "shoe_color",
         "manufacturer",
         "model_name",
         "picture",
@@ -50,9 +50,9 @@ def api_list_shoes(request):
         print(content)
 
         try:
-            bin_href = content["bin"]
-            print(f'this is the href {bin_href}')
-            bin = BinVO.objects.get(import_href=bin_href)
+            id = content["bin"]
+            print(f'this is the href {id}')
+            bin = BinVO.objects.get(id=id)
             print(f'this is the bin: {bin}')
             content["bin"] = bin
 

@@ -8,19 +8,6 @@ import ShoeList from './ShoeList';
 
 
 function App() {
-  // const [ shoes, setShoes ] = useState([]);
-  // const [ hats, setHats ] = useState([]);
-
-  // async function getShoes() {
-  //   const response = await fetch('http://localhost:8080/api/shoes/');
-  //   if (response.ok) {
-  //     const { shoes } = await.response.json();
-  //     setShoes(shoes);
-  //   } else {
-  //     console.error('An error occured fetching the data')
-  //   }
-  // }
-
   return (
     <BrowserRouter>
       <Nav />
